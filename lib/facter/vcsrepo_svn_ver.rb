@@ -2,6 +2,7 @@
 
 Facter.add(:vcsrepo_svn_ver) do
   setcode do
+    begin 
     if Facter.value(:operatingsystem) == 'Darwin' && !File.directory?(Facter::Core::Execution.execute('xcode-select -p'))
       ''
     else
@@ -14,5 +15,6 @@ Facter.add(:vcsrepo_svn_ver) do
     end
   rescue StandardError
     ''
+  end
   end
 end
